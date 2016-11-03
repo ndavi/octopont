@@ -1,0 +1,131 @@
+L'octopont demarre
+Le serveur OSC demarre.
+Le service OSC demarre.
+Fermeture du l'octopont
+L'octopont demarre
+Le serveur OSC demarre.
+Le service OSC demarre.
+Fermeture du l'octopont
+L'octopont demarre
+Le serveur OSC demarre.
+Le service OSC demarre.
+Fermeture du l'octopont
+L'octopont demarre
+Fermeture du l'octopont
+L'octopont demarre
+Le serveur OSC demarre.
+Le service OSC demarre.
+Fermeture du l'octopont
+2016-11-03 21:42:24,604 octopont - INFO: L'octopont demarre
+2016-11-03 21:42:24,605 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 21:42:24,605 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 21:42:26,570 octopont - INFO: Fermeture du l'octopont
+2016-11-03 21:54:13,968 octopont - INFO: L'octopont demarre
+2016-11-03 21:54:13,969 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 21:54:13,969 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 21:57:47,287 octopont - INFO: Fermeture du l'octopont
+2016-11-03 21:57:47,393 octopont - INFO: L'octopont demarre
+2016-11-03 21:57:47,394 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 21:57:47,394 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 21:57:53,377 octopont - INFO: Fermeture du l'octopont
+2016-11-03 21:58:31,884 octopont - INFO: L'octopont demarre
+2016-11-03 21:58:31,884 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 21:58:31,885 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:01:35,547 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:01:35,792 octopont - INFO: L'octopont demarre
+2016-11-03 22:01:35,793 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:01:35,793 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:01:43,469 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:02:40,852 octopont - INFO: L'octopont demarre
+2016-11-03 22:02:40,853 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:02:40,853 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:07:48,564 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:08:23,894 octopont - INFO: L'octopont demarre
+2016-11-03 22:08:23,894 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:08:23,895 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:08:32,199 octopont - INFO: L'octopont demarre
+2016-11-03 22:08:32,200 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:08:32,200 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:09:36,799 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:16:45,765 octopont - INFO: L'octopont demarre
+2016-11-03 22:16:45,765 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:16:45,765 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:17:47,857 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:17:47,967 octopont - INFO: L'octopont demarre
+2016-11-03 22:17:47,967 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:17:47,967 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:58:47,537 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:58:49,077 octopont - INFO: L'octopont demarre
+2016-11-03 22:58:49,078 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:58:49,078 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:59:05,249 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 22:59:14,019 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 22:59:15,422 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 22:59:35,733 octopont - INFO: Fermeture du l'octopont
+2016-11-03 22:59:36,554 octopont - INFO: L'octopont demarre
+2016-11-03 22:59:36,555 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 22:59:36,556 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 22:59:38,512 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:00:28,323 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:00:29,362 octopont - INFO: L'octopont demarre
+2016-11-03 23:00:29,368 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:00:29,369 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:01:55,461 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:01:55,992 octopont - INFO: L'octopont demarre
+2016-11-03 23:01:55,992 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:01:55,992 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:02:05,127 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:02:05,646 octopont - INFO: L'octopont demarre
+2016-11-03 23:02:05,646 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:02:05,647 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:02:06,680 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:09,476 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:11,589 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:12,677 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:13,601 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:15,039 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:16,087 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:02:41,524 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:02:42,049 octopont - INFO: L'octopont demarre
+2016-11-03 23:02:42,050 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:02:42,050 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:03:14,150 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:03:14,725 octopont - INFO: L'octopont demarre
+2016-11-03 23:03:14,726 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:03:14,727 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:03:15,933 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:03:58,941 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:03:59,732 octopont - INFO: L'octopont demarre
+2016-11-03 23:03:59,733 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:03:59,759 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:04:00,923 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:05:06,107 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:05:09,077 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:05:09,548 octopont - INFO: L'octopont demarre
+2016-11-03 23:05:09,549 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:05:09,549 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:05:10,476 octopont.oscserver - WARNING: Unknown command: /foo/bar string argument,1,2,3.1400001049
+2016-11-03 23:07:51,506 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:07:52,249 octopont - INFO: L'octopont demarre
+2016-11-03 23:07:52,249 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:07:52,250 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:09:10,401 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:10:59,711 octopont - INFO: L'octopont demarre
+2016-11-03 23:10:59,711 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:10:59,713 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:11:06,939 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:11:12,350 octopont - INFO: L'octopont demarre
+2016-11-03 23:11:12,354 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:11:12,355 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:11:12,358 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:13,358 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:14,359 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:15,361 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:16,361 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:17,362 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:18,363 octopont.oscserver - WARNING: Unknown command: /stage/test/config 0
+2016-11-03 23:11:19,281 octopont - INFO: Fermeture du l'octopont
+2016-11-03 23:13:59,572 octopont - INFO: L'octopont demarre
+2016-11-03 23:13:59,572 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-03 23:13:59,572 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-03 23:14:04,201 octopont - INFO: Fermeture du l'octopont
