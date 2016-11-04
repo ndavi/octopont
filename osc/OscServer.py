@@ -11,8 +11,6 @@ class OscServer(ServerThread):
         super(OscServer, self).__init__(port, UDP)
         self.log = logging.getLogger('octopont.oscserver')
         self.log.setLevel(logging.INFO)
-        self.feedback = False
-        self.feedbackPort = 7376
         self.ready = True
 
     def start(self):

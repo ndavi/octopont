@@ -182,3 +182,74 @@ Fermeture du l'octopont
 2016-11-04 09:41:31,967 octopont.oscserver - INFO: Le serveur OSC demarre.
 2016-11-04 09:41:31,967 octopont.oscserver - INFO: Le service OSC demarre.
 2016-11-04 09:41:42,579 octopont - INFO: Fermeture du l'octopont
+2016-11-04 09:55:20,903 octopont - INFO: L'octopont demarre
+2016-11-04 09:55:20,903 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 09:55:20,903 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 09:55:29,829 octopont - INFO: Fermeture du l'octopont
+2016-11-04 16:14:41,354 octopont - INFO: L'octopont demarre
+2016-11-04 16:14:41,370 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 16:14:41,371 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 16:15:10,733 octopont - INFO: L'octopont demarre
+2016-11-04 16:15:10,733 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 16:15:10,733 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 16:15:15,787 octopont - INFO: Fermeture du l'octopont
+2016-11-04 16:15:53,321 octopont - INFO: L'octopont demarre
+2016-11-04 16:15:53,322 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 16:15:53,322 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 16:15:53,322 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:53,322 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:53,323 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:54,324 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:54,325 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:54,327 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:55,325 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:55,326 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:55,328 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:56,326 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:56,327 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:56,329 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:57,328 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:57,329 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:57,330 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:58,329 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:58,331 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:58,332 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:15:59,331 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:15:59,332 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:15:59,333 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:16:00,333 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:16:00,334 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:16:00,335 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:16:01,334 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:16:01,336 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:16:01,337 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:16:02,336 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:16:02,381 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:16:02,382 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:16:02,661 octopont - INFO: Fermeture du l'octopont
+2016-11-04 16:23:08,327 octopont - INFO: L'octopont demarre
+2016-11-04 16:23:08,327 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 16:23:08,328 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 16:23:12,989 octopont - INFO: Fermeture du l'octopont
+2016-11-04 16:23:22,205 octopont - INFO: L'octopont demarre
+2016-11-04 16:23:22,205 octopont.oscserver - INFO: Le serveur OSC demarre.
+2016-11-04 16:23:22,205 octopont.oscserver - INFO: Le service OSC demarre.
+2016-11-04 16:23:22,206 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:22,206 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:22,206 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:23,208 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:23,209 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:23,210 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:24,209 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:24,211 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:24,212 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:25,211 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:25,211 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:25,212 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:26,212 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:26,214 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:26,215 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:27,214 octopont.oscserver - WARNING: Unknown command: /vezer/composition0/start 
+2016-11-04 16:23:27,215 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9 0
+2016-11-04 16:23:27,217 octopont.oscserver - WARNING: Unknown command: /composition/video/effect9/param1 0
+2016-11-04 16:23:28,118 octopont - INFO: Fermeture du l'octopont

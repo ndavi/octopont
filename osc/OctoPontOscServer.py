@@ -14,7 +14,7 @@ class OctoPontOSCServer(osc.OscServer):
         self.log = logging.getLogger('octopont.oscserver')
         self.log.setLevel(logging.INFO)
         self.feedback = False
-        self.feedbackPort = 7376
+        self.feedbackPort = 7969
         self.address = Address("127.0.0.1",7376,1)
 
     def start(self):
