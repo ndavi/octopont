@@ -55,7 +55,10 @@ class OctoPont(object):
         while True:
             data = []
             for i in range(0,254):
-                data.append(0)
+                if (i == 100):
+                    data.append(255)
+                else:
+                    data.append(0)
             self.dmxConverter.setDmxArray(data)
             sleep(1)
 

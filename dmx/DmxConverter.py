@@ -4,7 +4,6 @@ from liblo import *
 import logging
 
 from osc import OctoPontOscServer
-log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
@@ -12,7 +11,12 @@ class DmxConverter(object):
 
     def __init__(self, osc):
         self.dmxArray = None
+        self.log = logging.getLogger("dmxconverter")
+        self.log.setLevel(logging.INFO)
         self.osc = osc
+        self.nbrConvertingList = 1
+        self.effects = ["VEZERMOTOR"]
+        self.configVezerSend = [100, 5] #[0] = Start Channel [1] = Nbr Channel
 
 
     def setDmxArray(self,dmxArray):
@@ -20,6 +24,13 @@ class DmxConverter(object):
         self.convert()
 
     def convert(self):
-        msg = Message("/stage/test/config")
-        msg.add(self.dmxArray[0])
-        self.osc.sendDefault(msg)
+        for i in range(0, self.nbrConvertingList):
+            if self.effects[i] == "VEZERMOTOR":
+                self.convertToVezerMotor()
+
+    def convertToVezerMotor(self):
+        for i in range (self.configVezerSend[0], self.configVezerSend[0] + self.configVezerSend[1]):
+            if(self.dmxArray[i] == 255):
+                msg = Message("/vezer/composition" + str((i - self.configVezerSend[0])) + "/start")
+                self.log.info("Convertion du channel " + str(i) + " a " + str(self.dmxArray[i]) + " en /vezer/composition" + str((i - self.configVezerSend[0])) + "/start")
+                self.osc.sendDefault(msg)
