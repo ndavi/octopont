@@ -13,7 +13,6 @@ class DmxConverter(object):
         self.log = logging.getLogger("dmxconverter")
         self.log.setLevel(logging.INFO)
         self.osc = osc
-        self.nbrConvertingList = 2
         self.effects = ["VEZERMOTOR", "STROBE"]
         self.configVezerSend = [100, 5, None] #[0] = Start Channel [1] = Nbr Channel
         self.configStrobeSend = [150,151]
@@ -24,30 +23,33 @@ class DmxConverter(object):
         self.convert()
 
     def convert(self):
-        for i in range(0, self.nbrConvertingList):
-            if self.effects[i] == "VEZERMOTOR":
+        for effect in self.effects:
+            if effect == "VEZERMOTOR":
                 self.convertToVezerMotor()
-            elif self.effects[i] == "STROBE":
+            elif effect == "STROBE":
                 self.convertToStrobeMsg()
 
     def convertToVezerMotor(self):
         for i in range (self.configVezerSend[0], self.configVezerSend[0] + self.configVezerSend[1]):
             if(self.dmxArray[i] == 255):
-                msg = Message("/vezer/composition" + str((i - self.configVezerSend[0])) + "/start")
-                self.log.info("Convertion du channel " + str(i) + " a " + str(self.dmxArray[i]) + " en /vezer/composition" + str((i - self.configVezerSend[0])) + "/start")
-                self.osc.sendDefault(msg)
+                if(self.configVezerSend[2] is not None and self.configVezerSend[2] != i):
+                    strMsg = "/vezer/composition" + str(i - self.configVezerSend[2]) + "/start"
+                    self.osc.sendDefault(strMsg, "MOTEURS", [i, self.dmxArray[i]])
+                strMsg = "/vezer/composition" + str(i - self.configVezerSend[0]) + "/start"
+                self.osc.sendDefault(strMsg, "MOTEURS", [i, self.dmxArray[i]])
+                self.configVezerSend[2] = i
 
     def convertToStrobeMsg(self):
-        msg = Message("/composition/video/effect9")
+        strMsg = "/composition/video/effect9"
+        target = "VIDEO"
         if(self.dmxArray[self.configStrobeSend[0]] == 0):
-            msg.add(0)
-            self.osc.sendDefault(msg)
+            values = [1]
+            self.osc.sendDefault(strMsg, target,[self.configStrobeSend[0], self.dmxArray[self.configStrobeSend[0]]], values)
         elif(self.dmxArray[self.configStrobeSend[0]] == 255):
-            msg.add(1)
-            self.osc.sendDefault(msg)
-        valStrobe = (self.dmxArray[self.configStrobeSend[1]] / 255)
-        msg = Message("/composition/video/effect9/param1")
-        msg.add(valStrobe)
-        self.osc.sendDefault(msg)
+            values = [0]
+            self.osc.sendDefault(strMsg, target, [self.configStrobeSend[0], self.dmxArray[self.configStrobeSend[0]]],values)
+        values = [float(self.dmxArray[self.configStrobeSend[1]]) / float(255)]
+        strMsg = "/composition/video/effect9/param1"
+        self.osc.sendDefault(strMsg, "VIDEO",[self.configStrobeSend[1], self.dmxArray[self.configStrobeSend[1]]],values)
 
 
