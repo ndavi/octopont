@@ -55,18 +55,18 @@ class OctoPont(object):
         while True:
             data = []
             for i in range(0,254):
-                if (i == 151):
-                    data.append(100)
+                if (i == 100):
+                    data.append(255)
                 else:
                     data.append(0)
             self.dmxConverter.setDmxArray(data)
             sleep(1)
 
 def signal_handler(signal, frame):
-        usbDmx.log.info("Fermeture du l\'octopont")
+        usbDmx.log.info("Fermeture de l\'octopont")
         sys.exit(0)
 if __name__ == "__main__":
     usbDmx = OctoPont()
     usbDmx.start()
     signal.signal(signal.SIGINT, signal_handler)
-    usbDmx.runTest()
+    usbDmx.run()

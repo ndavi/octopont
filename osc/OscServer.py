@@ -18,7 +18,7 @@ class OscServer(ServerThread):
         super(OscServer, self).start()
 
     def send(self, dst, msg):
-        super(OscServer, self).send(Address(dst.get_hostname(), self.feedbackPort), msg)
+        super(OscServer, self).send(Address(dst.get_hostname(), dst.get_port()), msg)
 
     def setConfig(self, c):
         for k, l in c:
