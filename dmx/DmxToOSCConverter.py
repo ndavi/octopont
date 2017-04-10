@@ -6,11 +6,11 @@ import logging
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
-class DmxConverter(object):
+class DmxToOSCConverter(object):
 
     def __init__(self, osc):
         self.dmxArray = None
-        self.log = logging.getLogger("dmxconverter")
+        self.log = logging.getLogger("dmxtooscconverter")
         self.log.setLevel(logging.INFO)
         self.osc = osc
         self.effects = ["VEZERMOTOR", "STROBE"]

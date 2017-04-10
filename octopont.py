@@ -1,4 +1,5 @@
 from ola.ClientWrapper import ClientWrapper
+from artnetReceiver import ArtNetServer
 from time import sleep
 import osc
 import dmx
@@ -15,7 +16,8 @@ class OctoPont(object):
         self.workingDir = os.getcwd()
         self.setLogs()
         self.osc = osc.OctoPontOSCServer()
-        self.dmxConverter = dmx.DmxConverter(self.osc)
+        self.dmxConverter = dmx.DmxToOSCConverter(self.osc)
+        self.artnetConverter = dmx.ArtNetToDMXConverter()
         self.universe = 1
 
 
@@ -42,14 +44,21 @@ class OctoPont(object):
             exit(1)
         return True
 
-    def newData(self, data):
+    def newDMXData(self, data):
         self.dmxConverter.setDmxArray(data)
 
-    def run(self):
+    def newArtNetData(self, data):
+        self.artnetConverter.convert(data.framedata)
+
+    def runOscToDmx(self):
         wrapper = ClientWrapper()
         client = wrapper.Client()
-        client.RegisterUniverse(self.universe, client.REGISTER, self.newData)
+        client.RegisterUniverse(self.universe, client.REGISTER, self.newDMXData)
         wrapper.Run()
+
+    def runArtNetToDmx(self):
+        artNetReceiver = ArtNetServer("127.0.0.1")
+        artNetReceiver.run(self.newArtNetData)
 
     def runTest(self):
         while True:
@@ -65,8 +74,9 @@ class OctoPont(object):
 def signal_handler(signal, frame):
         usbDmx.log.info("Fermeture de l\'octopont")
         sys.exit(0)
+
 if __name__ == "__main__":
     usbDmx = OctoPont()
-    usbDmx.start()
+    #usbDmx.start()
     signal.signal(signal.SIGINT, signal_handler)
-    usbDmx.run()
+    usbDmx.runArtNetToDmx()
