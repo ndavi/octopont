@@ -14,11 +14,11 @@ class DmxConverter(object):
         self.log.setLevel(logging.INFO)
         self.osc = osc
         self.effects = ["VEZERMOTOR", "STROBE"]
-        self.configVezerSend = [140, 7] #[0] = Start Channel [1] = Nbr Channel
+        self.configVezerSend = [102, 7] #[0] = Start Channel [1] = Nbr Channel
         self.lastValueChan = []
         for i in range(0, 254):
             self.lastValueChan.append(None)
-        self.configStrobeSend = [148,149]
+        self.configStrobeSend = [119,120]
 
 
     def setDmxArray(self,dmxArray):
@@ -30,8 +30,7 @@ class DmxConverter(object):
             if effect == "VEZERMOTOR":
                 self.convertToVezerMotor()
             elif effect == "STROBE":
-                pass
-                #self.convertToStrobeMsg()
+                self.convertToStrobeMsg()
 
     def convertToVezerMotor(self):
         for i in range (self.configVezerSend[0], self.configVezerSend[0] + self.configVezerSend[1]):
@@ -55,18 +54,35 @@ class DmxConverter(object):
                     self.osc.sendDefault(strMsg, "TABLETTE", [i + 1, self.dmxArray[i]], [1])
 
     def convertToStrobeMsg(self):
+        doConvert1 = True
+        if (self.lastValueChan[self.configStrobeSend[0]] == None):
+            self.lastValueChan[self.configStrobeSend[0]] = self.dmxArray[self.configStrobeSend[0]]
+        elif (self.lastValueChan[self.configStrobeSend[0]] == self.dmxArray[self.configStrobeSend[0]]):
+            doConvert1 = False
+        else:
+            self.lastValueChan[self.configStrobeSend[0]] = self.dmxArray[self.configStrobeSend[0]]
+        doConvert2 = True
+        if (self.lastValueChan[self.configStrobeSend[1]] == None):
+            self.lastValueChan[self.configStrobeSend[1]] = self.dmxArray[self.configStrobeSend[1]]
+        elif (self.lastValueChan[self.configStrobeSend[1]] == self.dmxArray[self.configStrobeSend[1]]):
+            doConvert2 = False
+        else:
+            self.lastValueChan[self.configStrobeSend[1]] = self.dmxArray[self.configStrobeSend[1]]
+
         strMsg = "/composition/video/effect1/bypassed"
         target = "VIDEO"
-        if(self.dmxArray[self.configStrobeSend[0]] == 0):
+        if(self.dmxArray[self.configStrobeSend[0]] == 0 and doConvert1):
             values = [1]
-            self.osc.sendDefault(strMsg, target,[self.configStrobeSend[0], self.dmxArray[self.configStrobeSend[0]]], values)
-        elif(self.dmxArray[self.configStrobeSend[0]] == 255):
+            self.osc.sendDefault(strMsg, target,[self.configStrobeSend[0] + 1, self.dmxArray[self.configStrobeSend[0]]], values)
+        elif(self.dmxArray[self.configStrobeSend[0]] == 255 and doConvert1):
             values = [0]
-            self.osc.sendDefault(strMsg, target, [self.configStrobeSend[0], self.dmxArray[self.configStrobeSend[0]]],values)
-        values = [float(self.dmxArray[self.configStrobeSend[1]]) / float(255)]
-        if(values[0] >= 0.99):
-            values[0] = 0.99
-        strMsg = "/composition/video/effect1/param1/values"
-        self.osc.sendDefault(strMsg, "VIDEO",[self.configStrobeSend[1], self.dmxArray[self.configStrobeSend[1]]],values)
+            self.osc.sendDefault(strMsg, target, [self.configStrobeSend[0] +1, self.dmxArray[self.configStrobeSend[0]]],values)
+        if(doConvert2):
+            values = [float(self.dmxArray[self.configStrobeSend[1]]) / float(255)]
+            if(values[0] >= 0.99):
+                values[0] = 0.99
+            strMsg = "/composition/video/effect1/param1/values"
+            self.osc.sendDefault(strMsg, "VIDEO",[self.configStrobeSend[1]+1, self.dmxArray[self.configStrobeSend[1]]],values)
+
 
 
