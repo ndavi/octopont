@@ -36,7 +36,6 @@ class OctoPont(object):
         self.log.addHandler(self.debuglog)
 
     def start(self):
-        self.log.info('L\'octopont demarre')
         try:
             self.osc.start()
         except Exception, e:
@@ -84,7 +83,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     usbDmx = OctoPont()
     if(args.artnetdmx):
+        usbDmx.log.info('L\'octopont demarre en mode pont artnet -> dmx')
         usbDmx.runArtNetToDmx()
     else:
+        usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
         usbDmx.runOscToDmx()
     signal.signal(signal.SIGINT, signal_handler)
