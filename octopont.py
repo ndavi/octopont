@@ -8,6 +8,7 @@ import signal
 import sys
 import traceback
 import os
+import argparse
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
@@ -51,6 +52,7 @@ class OctoPont(object):
         self.artnetConverter.convert(data.framedata)
 
     def runOscToDmx(self):
+        self.start()
         wrapper = ClientWrapper()
         client = wrapper.Client()
         client.RegisterUniverse(self.universe, client.REGISTER, self.newDMXData)
@@ -76,7 +78,13 @@ def signal_handler(signal, frame):
         sys.exit(0)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--artnetdmx', help='Lancement du programme en mode pont artnet -> dmx', action='store_true')
+    parser.add_argument('--dmxosc', help='Lancement du programme en mode pont convertisseur dmx -> osc', action='store_true')
+    args = parser.parse_args()
     usbDmx = OctoPont()
-    #usbDmx.start()
+    if(args.artnetdmx):
+        usbDmx.runArtNetToDmx()
+    else:
+        usbDmx.runOscToDmx()
     signal.signal(signal.SIGINT, signal_handler)
-    usbDmx.runArtNetToDmx()

@@ -58,7 +58,7 @@ class ArtNetServer(threading.Thread):
         if (artNetData is None or not hasattr(artNetData,"framedata")):
             return
 
-        self.log.info("Reception d'une trame artnet : " + str(artNetData.framedata))
+        self.log.info("Conversion d'une trame artnet : " + str(artNetData.framedata))
         self.data_callback(artNetData)
 
     def send_dmx(self, frame, universe=0):

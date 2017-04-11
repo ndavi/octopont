@@ -13,20 +13,19 @@ class ArtNetToDMXConverter(object):
         self.log = logging.getLogger("artnetdmxconverter")
         self.log.setLevel(logging.INFO)
         self.universe = universe
-        #self.wrapper = ClientWrapper()
+        self.wrapper = ClientWrapper()
 
-    def DmxSent(self):
+    def DmxSent(self,state):
         self.wrapper.Stop()
 
 
     def convert(self,artnetArray):
         data = array.array('B')
-        data.append(10)
-        data.append(50)
-        data.append(255)
-        #client = self.wrapper.Client()
-        #client.SendDmx(self.universe, data, self.DmxSent)
-        #self.wrapper.Run()
+        for value in artnetArray:
+            data.append(value)
+        client = self.wrapper.Client()
+        client.SendDmx(self.universe, data, self.DmxSent)
+        self.wrapper.Run()
 
 
 

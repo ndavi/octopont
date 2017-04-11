@@ -21,9 +21,13 @@ class ArtNetSender():
         sock.sendto(self.packet.encode(), (self.address, self.port))
 
 if __name__ == "__main__":
+    i = 0
     artnetSender = ArtNetSender()
-    artnetSender.packet.frame[1] = 200
     while True:
-        time.sleep(1)
+        if(i == 254):
+            i = 0
+        artnetSender.packet.frame[1] = i
+        i = i + 1
+        time.sleep(0.2)
         print("send artnet")
         artnetSender.sendFrames()
