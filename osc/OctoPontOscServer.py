@@ -4,21 +4,32 @@ import OscServer as osc
 from liblo import make_method, Address, Message
 import sys
 import logging
+import ConfigParser
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class OctoPontOSCServer(osc.OscServer):
     def __init__(self, port=7969):
+        self.config = ConfigParser.RawConfigParser()
         super(OctoPontOSCServer, self).__init__(port)
         self.log = logging.getLogger('octopont.oscserver')
         self.log.setLevel(logging.INFO)
+        self.readConfig()
         #self.feedbackPort = 7333
-        self.targets = {'MOTEURS': Address("192.168.0.110",1234,1), 'VIDEO':Address("192.168.0.106",7000,1), 'TABLETTE':Address("192.168.0.107",8000,1)}
 
     def start(self):
         self.log.info('Le serveur OSC demarre.')
         super(OctoPontOSCServer, self).start()
+
+    def readConfig(self):
+        self.config.read('config.cfg')
+        moteurs, portmoteurs = self.config.get("OSCTARGET","MOTEURS").split(":")
+        video, portvideo = self.config.get("OSCTARGET","VIDEO").split(":")
+        tablette, porttablette = self.config.get("OSCTARGET","TABLETTE").split(":")
+
+        self.targets = {'MOTEURS': Address(moteurs,portmoteurs,1), 'VIDEO':Address(video,portvideo,1), 'TABLETTE':Address(tablette,porttablette,1)}
+
 
     def sendDefault(self, strMsg, target, dmxinfos , args=[]):
         address = self.targets[target]
