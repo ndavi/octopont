@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 
 
 class ArtNetSender():
-    def __init__(self,address='127.0.0.1', port=STANDARD_PORT):
+    def __init__(self,address='192.168.0.103', port=STANDARD_PORT):
         self.log = logging.getLogger('motherboard.artnet')
         self.address = address
         self.port = port
@@ -28,6 +28,6 @@ if __name__ == "__main__":
             i = 0
         artnetSender.packet.frame[1] = i
         i = i + 1
-        time.sleep(0.2)
+        time.sleep(0.01)
         print("send artnet")
         artnetSender.sendFrames()

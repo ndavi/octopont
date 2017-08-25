@@ -1,4 +1,4 @@
-from ola.ClientWrapper import ClientWrapper
+#from ola.ClientWrapper import ClientWrapper
 from artnetReceiver import ArtNetServer
 from time import sleep
 import osc
@@ -17,8 +17,9 @@ class OctoPont(object):
         self.workingDir = os.getcwd()
         self.setLogs()
         self.osc = osc.OctoPontOSCServer()
-        self.dmxConverter = dmx.DmxToOSCConverter(self.osc)
-        self.artnetConverter = dmx.ArtNetToDMXConverter()
+        #self.dmxConverter = dmx.DmxToOSCConverter(self.osc)
+        #self.artnetConverter = dmx.ArtNetToDMXConverter()
+        self.artnetNetworkChanger = dmx.ArtNetToArtnet()
         self.universe = 1
 
 
@@ -50,9 +51,12 @@ class OctoPont(object):
     def newArtNetData(self, data):
         self.artnetConverter.convert(data.framedata)
 
+    def newArtNetDataNetworkChange(self, data):
+        self.artnetNetworkChanger.changeNetwork(data.framedata)
+
     def runOscToDmx(self):
         self.start()
-        wrapper = ClientWrapper()
+        #wrapper = ClientWrapper()
         client = wrapper.Client()
         client.RegisterUniverse(self.universe, client.REGISTER, self.newDMXData)
         wrapper.Run()
@@ -60,6 +64,10 @@ class OctoPont(object):
     def runArtNetToDmx(self):
         artNetReceiver = ArtNetServer("127.0.0.1")
         artNetReceiver.run(self.newArtNetData)
+
+    def runArtNetToOtherNetwork(self):
+        artNetReceiver = ArtNetServer("127.0.0.1")
+        artNetReceiver.run(self.newArtNetDataNetworkChange)
 
     def runTest(self):
         while True:
@@ -80,11 +88,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--artnetdmx', help='Lancement du programme en mode pont artnet -> dmx', action='store_true')
     parser.add_argument('--dmxosc', help='Lancement du programme en mode pont convertisseur dmx -> osc', action='store_true')
+    parser.add_argument('--artnetchanger', help='Lancement du programme en mode pont routeur artnet -> artnet', action='store_true')
     args = parser.parse_args()
     usbDmx = OctoPont()
     if(args.artnetdmx):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> dmx')
         usbDmx.runArtNetToDmx()
+    elif(args.artnetchanger):
+        usbDmx.log.info('L\'octopont demarre en mode pont artnet -> artnet')
+        usbDmx.runArtNetToOtherNetwork()
     else:
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
         usbDmx.runOscToDmx()

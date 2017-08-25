@@ -467,3 +467,63 @@
 2017-04-11 16:12:35,645 octopont - INFO: L'octopont demarre
 2017-04-11 16:12:35,646 octopont.oscserver - INFO: Le serveur OSC demarre.
 2017-04-11 16:12:35,646 octopont.oscserver - INFO: Le service OSC demarre.
+2017-04-11 16:31:37,611 octopont - INFO: L'octopont demarre
+2017-04-11 16:31:37,611 octopont.oscserver - INFO: Le serveur OSC demarre.
+2017-04-11 16:31:37,612 octopont.oscserver - INFO: Le service OSC demarre.
+2017-04-11 16:34:15,481 octopont - INFO: L'octopont demarre
+2017-04-11 16:34:15,485 octopont.oscserver - INFO: Le serveur OSC demarre.
+2017-04-11 16:34:15,486 octopont.oscserver - INFO: Le service OSC demarre.
+2017-04-11 16:48:26,134 octopont - INFO: L'octopont demarre en mode convertisseur dmx -> osc
+2017-04-11 16:48:26,134 octopont.oscserver - INFO: Le serveur OSC demarre.
+2017-04-11 16:48:26,135 octopont.oscserver - INFO: Le service OSC demarre.
+2017-05-17 21:24:20,083 octopont - INFO: L'octopont demarre en mode convertisseur dmx -> osc
+2017-05-17 21:24:20,084 octopont.oscserver - INFO: Le serveur OSC demarre.
+2017-05-17 21:24:20,084 octopont.oscserver - INFO: Le service OSC demarre.
+2017-08-25 16:54:55,374 octopont - INFO: L'octopont demarre en mode convertisseur dmx -> osc
+2017-08-25 16:54:55,374 octopont.oscserver - INFO: Le serveur OSC demarre.
+2017-08-25 16:54:55,374 octopont.oscserver - INFO: Le service OSC demarre.
+2017-08-25 16:55:47,538 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 16:57:21,658 octopont - INFO: L'octopont demarre en mode pont artnet -> dmx
+2017-08-25 16:58:15,403 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 16:59:16,551 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:00:46,372 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:08:35,973 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:10:32,259 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:10:45,423 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:14:52,055 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:15:02,510 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:15:22,154 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:21:07,557 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:22:15,034 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:22:54,001 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:23:01,011 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:23:20,940 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:23:29,703 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:23:39,973 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:24:57,046 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:26:06,578 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:26:40,168 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:27:13,242 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:28:16,943 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:28:37,091 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:30:56,006 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:31:01,366 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:34:06,418 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:35:53,284 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:36:43,991 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:37:06,792 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:41:26,693 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:47:21,315 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:47:45,518 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:49:08,548 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:49:34,495 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:49:35,878 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:49:45,761 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:49:58,792 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:50:11,148 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:50:12,294 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:50:19,438 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:50:31,869 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:52:02,049 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:52:52,663 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
+2017-08-25 17:53:07,710 octopont - INFO: L'octopont demarre en mode pont artnet -> artnet
