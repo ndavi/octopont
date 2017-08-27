@@ -52,6 +52,11 @@ class OctoPont(object):
         self.artnetConverter.convert(data.framedata)
 
     def newArtNetDataNetworkChange(self, data):
+        result = int(data.framedata[1] * 2.5)
+        if(result <= 255):
+            data.framedata[1] = result
+        else:
+            data.framedata[1] = 255
         self.artnetNetworkChanger.changeNetwork(data.framedata)
 
     def runOscToDmx(self):
