@@ -1,3 +1,4 @@
 from DmxToOSCConverter import DmxToOSCConverter
 from ArtNetToDMXConverter import ArtNetToDMXConverter
 from ArtNetToArtNet import ArtNetToArtnet
+from DmxToArtnetConverter import DmxToArtnetConverter

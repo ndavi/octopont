@@ -1,3 +1,4 @@
+import ConfigParser
 import socket
 from artnet import packet, STANDARD_PORT, OPCODES, STYLE_CODES
 import sys
@@ -13,7 +14,7 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class ArtNetServer(threading.Thread):
-    def __init__(self, address, nodaemon=False, runout=False):
+    def __init__(self, address="127.0.0.1", nodaemon=False, runout=False):
         super(ArtNetServer, self).__init__()
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -27,12 +28,20 @@ class ArtNetServer(threading.Thread):
         self.broadcast_address = '<broadcast>'
         self.last_poll = 0
         self.address = address
+        self.config = ConfigParser.RawConfigParser()
+        self.readConfig()
+
 
         self.nodaemon = nodaemon
         self.daemon = not nodaemon
         self.running = True
 
         self.data_callback = None
+
+    def readConfig(self):
+        self.config.read('config.cfg')
+        self.address = self.config.get("RECEIVERIP","ARTNETIP")
+
 
     def run(self, data_callback):
         self.data_callback = data_callback

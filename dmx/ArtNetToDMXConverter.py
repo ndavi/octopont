@@ -1,3 +1,4 @@
+import ConfigParser
 import array
 from ola.ClientWrapper import ClientWrapper
 
@@ -13,6 +14,8 @@ class ArtNetToDMXConverter(object):
         self.log = logging.getLogger("artnetdmxconverter")
         self.log.setLevel(logging.INFO)
         self.universe = universe
+        self.config = ConfigParser.RawConfigParser()
+        self.readConfig()
         try:
             self.wrapper = ClientWrapper()
         except Exception:
@@ -21,6 +24,10 @@ class ArtNetToDMXConverter(object):
 
     def DmxSent(self,state):
         self.wrapper.Stop()
+
+    def readConfig(self):
+        self.config.read('config.cfg')
+        self.universe = int(self.config.get("SENDERIP","DMXUNIVERSE"))
 
 
     def convert(self,artnetArray):
