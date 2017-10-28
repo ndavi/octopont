@@ -31,7 +31,7 @@ class OctoPontOSCServer(osc.OscServer):
         video, portvideo = self.config.get("OSCTARGET","VIDEO").split(":")
         tablette, porttablette = self.config.get("OSCTARGET","TABLETTE").split(":")
         ipReceiveOsc, portIpReceiveOsc = self.config.get("RECEIVERIP","IPOSCRECEIVE").split(":")
-        self.receive_address = ipReceiveOsc, portIpReceiveOsc
+        self.receive_address = ipReceiveOsc, int(portIpReceiveOsc)
         self.targets = {'MOTEURS': Address(moteurs,portmoteurs,1), 'VIDEO':Address(video,portvideo,1), 'TABLETTE':Address(tablette,porttablette,1)}
 
 
