@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+import OSC
 
 import OscServer as osc
 from liblo import make_method, Address, Message
@@ -16,6 +17,8 @@ class OctoPontOSCServer(osc.OscServer):
         self.log = logging.getLogger('octopont.oscserver')
         self.log.setLevel(logging.INFO)
         self.readConfig()
+        self.s = OSC.ThreadingOSCServer(self.receive_address)
+        self.s.addDefaultHandlers()
         #self.feedbackPort = 7333
 
     def start(self):
@@ -27,7 +30,8 @@ class OctoPontOSCServer(osc.OscServer):
         moteurs, portmoteurs = self.config.get("OSCTARGET","MOTEURS").split(":")
         video, portvideo = self.config.get("OSCTARGET","VIDEO").split(":")
         tablette, porttablette = self.config.get("OSCTARGET","TABLETTE").split(":")
-
+        ipReceiveOsc, portIpReceiveOsc = self.config.get("RECEIVERIP","IPOSCRECEIVE").split(":")
+        self.receive_address = ipReceiveOsc, portIpReceiveOsc
         self.targets = {'MOTEURS': Address(moteurs,portmoteurs,1), 'VIDEO':Address(video,portvideo,1), 'TABLETTE':Address(tablette,porttablette,1)}
 
 

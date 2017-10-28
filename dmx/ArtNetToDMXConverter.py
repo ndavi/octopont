@@ -13,7 +13,11 @@ class ArtNetToDMXConverter(object):
         self.log = logging.getLogger("artnetdmxconverter")
         self.log.setLevel(logging.INFO)
         self.universe = universe
-        self.wrapper = ClientWrapper()
+        try:
+            self.wrapper = ClientWrapper()
+        except Exception:
+            self.log.error("Cannot bind dmx wrapper : ENTEC not connected")
+
 
     def DmxSent(self,state):
         self.wrapper.Stop()
