@@ -76,7 +76,8 @@ class ArtNetServer(threading.Thread):
 
     def send_poll(self):
         p = packet.PollPacket(address=self.broadcast_address)
-        self.sock.sendto(p.encode(), (p.address, STANDARD_PORT))
+        #TODO : See what this line crash when IP is loopback
+#        self.sock.sendto(p.encode(), (p.address, STANDARD_PORT))
 
     def send_poll_reply(self, poll):
         ip_address = socket.gethostbyname(socket.gethostname())

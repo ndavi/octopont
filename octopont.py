@@ -25,6 +25,7 @@ class OctoPont(object):
         self.artnetToDmxConverter = dmx.ArtNetToDMXConverter()
         self.artnetNetworkChanger = dmx.ArtNetToArtnet()
         self.oscToArtNetConverter = osc.OscToArtnetConverter(self.osc)
+        self.fixtureMoteurs = dmx.FixtureMoteurs(self.osc)
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
 
@@ -73,7 +74,17 @@ class OctoPont(object):
     def newDmxToArtnetData(self,data):
         self.dmxToArtnetConverter.convert(data)
 
+    def newDmxFixtureMoteursData(self,data):
+        self.fixtureMoteurs.setDmxArray(data)
+
     def runDmxToOsc(self):
+        self.oscStart()
+        wrapper = ClientWrapper()
+        client = wrapper.Client()
+        client.RegisterUniverse(self.receiveUniverse, client.REGISTER, self.newDmxToOscData)
+        wrapper.Run()
+
+    def runFixtureMoteurs(self):
         self.oscStart()
         wrapper = ClientWrapper()
         client = wrapper.Client()
@@ -119,6 +130,8 @@ if __name__ == "__main__":
     parser.add_argument('--artnetchanger', help='Lancement du programme en mode pont routeur artnet -> artnet', action='store_true')
     parser.add_argument('--osctoartnet', help='Lancement du programme en mode pont routeur osc -> artnet', action='store_true')
     parser.add_argument('--node', help='Lancement du programme en mode node', action='store_true')
+    parser.add_argument('--fixtureMoteurs', help='Lancement du programme en mode fixture moteurs', action='store_true')
+
     args = parser.parse_args()
     usbDmx = OctoPont()
     if(args.artnetdmx):
@@ -134,6 +147,9 @@ if __name__ == "__main__":
     elif (args.osctoartnet):
         usbDmx.log.info('L\'octopont demarre en mode pont osc -> artnet')
         usbDmx.runOscToArtNet()
+    elif (args.fixtureMoteurs):
+        usbDmx.log.info('L\'octopont demarre en mode fixture moteurs')
+        usbDmx.runFixtureMoteurs()
     else:
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
         usbDmx.runDmxToOsc();
