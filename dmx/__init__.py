@@ -3,3 +3,4 @@ from ArtNetToDMXConverter import ArtNetToDMXConverter
 from ArtNetToArtNet import ArtNetToArtnet
 from DmxToArtnetConverter import DmxToArtnetConverter
 from FixtureMoteurs import FixtureMoteurs
+from XInputToArtnetConverter import XinputToArtnetConveter

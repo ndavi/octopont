@@ -13,6 +13,7 @@ class DmxToArtnetConverter(object):
         self.log = logging.getLogger("dmxtooscconverter")
         self.log.setLevel(logging.INFO)
         self.config = ConfigParser.RawConfigParser()
+        self.readConfig()
 
 
     def convert(self, data):
