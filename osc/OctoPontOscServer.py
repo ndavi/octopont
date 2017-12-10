@@ -37,9 +37,12 @@ class OctoPontOSCServer(osc.OscServer):
 
     def sendDefault(self, strMsg, target, dmxinfos , args=[]):
         address = self.targets[target]
-        self.log.info(
-            "Convertion du channel " + str(dmxinfos[0]) + " a " + str(dmxinfos[1]) + " en "
-            + strMsg + " args : " + str(args) + " a " + str(address.get_hostname()) + ":" + str(address.get_port()))
+        if dmxinfos:
+            self.log.info(
+                "Convertion du channel " + str(dmxinfos[0]) + " a " + str(dmxinfos[1]) + " en "
+                + strMsg + " args : " + str(args) + " a " + str(address.get_hostname()) + ":" + str(address.get_port()))
+        else:
+            self.log.info("Envoie de : " + strMsg + " a " + str(address.get_hostname()) + ":" + str(address.get_port()) + "VALEUR : " + str(args))
         msg = Message(strMsg)
         for arg in args:
             msg.add(arg)

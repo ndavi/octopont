@@ -88,7 +88,7 @@ class OctoPont(object):
         self.oscStart()
         wrapper = ClientWrapper()
         client = wrapper.Client()
-        client.RegisterUniverse(self.receiveUniverse, client.REGISTER, self.newDmxToOscData)
+        client.RegisterUniverse(self.receiveUniverse, client.REGISTER, self.newDmxFixtureMoteursData)
         wrapper.Run()
 
     def runArtNetToDmx(self):

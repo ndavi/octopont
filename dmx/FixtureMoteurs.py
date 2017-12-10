@@ -14,24 +14,27 @@ class FixtureMoteurs(object):
         self.log.setLevel(logging.INFO)
         self.osc = osc
         self.config = ConfigParser.RawConfigParser()
+        self.config.read('config.cfg')
         self.nbrMoteurs = self.config.get("CHANNELMOTEURS","NBRMOTEURS")
         self.channelMoteurs = []
-        for i in range(0,self.nbrMoteurs):
-            self.channelMoteurs.append(self.config.get("CHANNELMOTEURS","MOTEUR" + str(i)))
+        for i in range(0,int(self.nbrMoteurs)):
+            self.channelMoteurs.append(self.config.get("CHANNELMOTEURS","MOTEUR" + str(i)).split(','))
 
     def setDmxArray(self,dmxArray):
         self.dmxArray = dmxArray
         self.convert()
 
     def convert(self):
-        for i in range(0,self.nbrMoteurs):
+        for i in range(0,int(self.nbrMoteurs)):
             channels = self.channelMoteurs[i]
-            vitesse = self.dmxArray[channels[0]]
-            position = self.dmxArray[channels[1]]
-            messagePosition = "/m"+i+"PositionControl"
-            messageVitesse = "/m"+i+"Speed"
-            self.osc.sendDefault(messagePosition, "MOTEURS", [vitesse])
-            self.osc.sendDefault(messageVitesse, "MOTEURS", [position])
+            position = self.dmxArray[int(channels[0])]
+            position = (position / 2.55) / 100
+            vitesse = self.dmxArray[int(channels[1])]
+            vitesse = (vitesse / 2.55) / 100
+            messagePosition = "/m"+str(i)+"PositionControl"
+            messageVitesse = "/m"+str(i)+"Speed"
+            self.osc.sendDefault(messageVitesse, "MOTEURS",None, [vitesse])
+            self.osc.sendDefault(messagePosition, "MOTEURS",None, [position])
 
 
 
