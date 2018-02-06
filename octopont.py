@@ -119,6 +119,7 @@ def signal_handler(signal, frame):
 
 
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal_handler)
     parser = argparse.ArgumentParser()
     parser.add_argument('--artnetdmx', help='Lancement du programme en mode pont artnet -> dmx', action='store_true')
     parser.add_argument('--dmxosc', help='Lancement du programme en mode pont convertisseur dmx -> osc',
@@ -170,4 +171,3 @@ if __name__ == "__main__":
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
         usbDmx.dmxToOscConverter = dmx.DmxToOSCConverter(usbDmx.osc)
         usbDmx.runDmxToOsc()
-    signal.signal(signal.SIGINT, signal_handler)

@@ -4,17 +4,21 @@ from __future__ import print_function
 
 import ConfigParser
 import logging
-
+from time import sleep
 from inputs import get_gamepad
-
+from inputs import UnpluggedError
 from sender import ArtNetSender
+
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
-
+MAX_JOYSTICK_VALUE_RIGHT = 32767.0
+MAX_JOYSTICK_VALUE_LEFT = 32768.0
 class XinputToArtnetConverter(object):
 
     def __init__(self):
+        self.log = logging.getLogger("dmxtooscconverter")
+        self.log.setLevel(logging.INFO)
         self.keyMapping = {"BTN_SOUTH": 0, # Croix
                            "BTN_WEST": 1, # Triangle
                            "BTN_NORTH": 2, # Carre
@@ -39,7 +43,7 @@ class XinputToArtnetConverter(object):
                            "ABS_HAT0Y_RIGHT": 21, # Fleche bas
                            "ABS_HAT0X_LEFT": 22, # Fleche gauche
                            "ABS_HAT0X_RIGHT": 23, # Fleche droite
-
+                           "BTN_MODE": 24,  # Bouton du milieu
                            }
         self.joysticksCode = [
             "ABS_X", "ABS_Y",
@@ -55,14 +59,29 @@ class XinputToArtnetConverter(object):
         self.start()
 
     def start(self):
+        self.log.info("Le recepteur Xinput est pret")
         while True:
-            events = get_gamepad()
-            for event in events:
-                if event.ev_type == "Key":
-                    self.btnClicked(event)
-                elif event.ev_type == "Absolute":
-                    self.absoluteMoved(event)
-            self.artnetSender.sendFramesWithLog()
+            try:
+                events = get_gamepad()
+                self.getInputs(events)
+            except UnpluggedError, err:
+                self.log.error(err.message)
+                exit(200)
+            except IOError, err:
+                self.log.error("Gamepad disconnected " + err.message)
+                exit(201)
+            except KeyError, err:
+                self.log.error("Le gamepad n'est pas dans le bon mode reception de : " + err.message)
+                exit(202)
+
+
+    def getInputs(self, events):
+       for event in events:
+           if event.ev_type == "Key":
+               self.btnClicked(event)
+           elif event.ev_type == "Absolute":
+               self.absoluteMoved(event)
+       self.artnetSender.sendFramesWithLog()
 
     def btnClicked(self, e):
         if e.state == 0:
@@ -89,23 +108,31 @@ class XinputToArtnetConverter(object):
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = 255
 
     def sendJoysticks(self, e):
-        # Go to right
         if e.state == 255 and e.code in ["ABS_Y", "ABS_RY"]:
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = 0
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_RIGHT"]] = 0
         elif e.state == 0:
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = 0
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_RIGHT"]] = 0
+        # Go to right
         elif e.state > 0:
-            dmxToSend = int((e.state / 32767.0) * 255)
+            dmxToSend = int((e.state / MAX_JOYSTICK_VALUE_RIGHT) * 255)
+            dmxToSend = self.checkDmxToSend(dmxToSend, e)
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_RIGHT"]] = dmxToSend
         # Go to left
         elif e.state < 0:
-            dmxToSend = int(((e.state * -1) / 32768.0) * 255)
+            dmxToSend = int(((e.state * -1) / MAX_JOYSTICK_VALUE_LEFT) * 255)
+            dmxToSend = self.checkDmxToSend(dmxToSend, e)
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = dmxToSend
 
     def sendBackButtons(self, e):
         self.artnetSender.packet.frame[self.keyMapping[e.code]] = e.state
+
+    def checkDmxToSend(self, dmxToSend, e):
+        if dmxToSend > 255 or dmxToSend < 0:
+            self.log.warning("Valeurs incorrectes de la manette sur " + e.code)
+            dmxToSend = 255
+        return dmxToSend
 
     def readConfig(self):
         self.config.read('config.cfg')
