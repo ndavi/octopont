@@ -164,7 +164,7 @@ if __name__ == "__main__":
 
     elif (args.xinputToArtnet):
         usbDmx.log.info('L\'octopont demarre en mode xinput -> artnet')
-        converter = dmx.XinputToArtnetConveter()
+        converter = dmx.XinputToArtnetConverter()
     else:
         usbDmx.osc = osc.OctoPontOSCServer()
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')

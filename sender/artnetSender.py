@@ -4,13 +4,13 @@ import time
 
 from artnet import packet, STANDARD_PORT
 
-logging.basicConfig()
-log = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class ArtNetSender():
     def __init__(self, address='192.168.1.26', port=STANDARD_PORT):
-        self.log = logging.getLogger('motherboard.artnet')
+        self.log = logging.getLogger(__name__)
+        self.log.setLevel(logging.INFO)
         self.address = address
         self.port = port
         self.log.info('Le service artnet est pret')
@@ -20,6 +20,10 @@ class ArtNetSender():
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         sock.sendto(self.packet.encode(), (self.address, self.port))
+
+    def sendFramesWithLog(self):
+        self.log.info("Sending " + str(self.packet.frame))
+        self.sendFrames()
 
 
 if __name__ == "__main__":
