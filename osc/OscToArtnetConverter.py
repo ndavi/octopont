@@ -1,8 +1,7 @@
 #!/usr/bin/python2
 import ConfigParser
-import threading
-from liblo import *
 import logging
+import threading
 
 from sender import ArtNetSender
 
@@ -18,14 +17,14 @@ class OscToArtnetConverter(object):
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
 
-    def sendTopDepart(self,addr, tags, stuff, source):
+    def sendTopDepart(self, addr, tags, stuff, source):
         self.log.info("Receiving TOP DEPART")
         artnetSender = ArtNetSender(self.artNetIp)
         artnetSender.packet.frame[0] = 255
         artnetSender.packet.universe = self.senderUniverse
         artnetSender.sendFrames()
 
-    def sendTop(self,addr, tags, stuff, source):
+    def sendTop(self, addr, tags, stuff, source):
         self.log.info("Received TOP")
         artnetSender = ArtNetSender(self.artNetIp)
         artnetSender.packet.universe = self.senderUniverse
@@ -42,12 +41,5 @@ class OscToArtnetConverter(object):
 
     def readConfig(self):
         self.config.read('config.cfg')
-        self.artNetIp = self.config.get("SENDERIP","ARTNETIP")
-        self.senderUniverse = int(self.config.get("SENDERIP","ARTNETUNIVERSE"))
-
-
-
-
-
-
-
+        self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")
+        self.senderUniverse = int(self.config.get("SENDERIP", "ARTNETUNIVERSE"))

@@ -1,9 +1,8 @@
 import ConfigParser
 import array
-from ola.ClientWrapper import ClientWrapper
-
-from liblo import *
 import logging
+
+from ola.ClientWrapper import ClientWrapper
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
@@ -21,25 +20,17 @@ class ArtNetToDMXConverter(object):
         except Exception:
             self.log.error("Cannot bind dmx wrapper : ENTEC not connected")
 
-
-    def DmxSent(self,state):
+    def DmxSent(self, state):
         self.wrapper.Stop()
 
     def readConfig(self):
         self.config.read('config.cfg')
-        self.universe = int(self.config.get("SENDERIP","DMXUNIVERSE"))
+        self.universe = int(self.config.get("SENDERIP", "DMXUNIVERSE"))
 
-
-    def convert(self,artnetArray):
+    def convert(self, artnetArray):
         data = array.array('B')
         for value in artnetArray:
             data.append(value)
         client = self.wrapper.Client()
         client.SendDmx(self.universe, data, self.DmxSent)
         self.wrapper.Run()
-
-
-
-
-
-

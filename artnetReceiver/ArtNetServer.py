@@ -1,16 +1,13 @@
 import ConfigParser
+import logging
 import socket
-from artnet import packet, STANDARD_PORT, OPCODES, STYLE_CODES
-import sys
 import threading
-import socket
 import time
-import logging
-import json
-import logging
+
+from artnet import packet, STANDARD_PORT, STYLE_CODES
+
 log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
-
 
 
 class ArtNetServer(threading.Thread):
@@ -31,7 +28,6 @@ class ArtNetServer(threading.Thread):
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
 
-
         self.nodaemon = nodaemon
         self.daemon = not nodaemon
         self.running = True
@@ -40,8 +36,7 @@ class ArtNetServer(threading.Thread):
 
     def readConfig(self):
         self.config.read('config.cfg')
-        self.address = self.config.get("RECEIVERIP","ARTNETIP")
-
+        self.address = self.config.get("RECEIVERIP", "ARTNETIP")
 
     def run(self, data_callback):
         self.data_callback = data_callback
@@ -64,7 +59,7 @@ class ArtNetServer(threading.Thread):
             self.send_poll()
 
         artNetData = self.read_artnet()
-        if (artNetData is None or not hasattr(artNetData,"framedata")):
+        if (artNetData is None or not hasattr(artNetData, "framedata")):
             return
 
         self.log.info("Conversion d'une trame artnet : " + str(artNetData.framedata))
@@ -76,8 +71,9 @@ class ArtNetServer(threading.Thread):
 
     def send_poll(self):
         p = packet.PollPacket(address=self.broadcast_address)
-        #TODO : See what this line crash when IP is loopback
-#        self.sock.sendto(p.encode(), (p.address, STANDARD_PORT))
+        # TODO : See what this line crash when IP is loopback
+
+    #        self.sock.sendto(p.encode(), (p.address, STANDARD_PORT))
 
     def send_poll_reply(self, poll):
         ip_address = socket.gethostbyname(socket.gethostname())

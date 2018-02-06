@@ -1,10 +1,8 @@
 import ConfigParser
-import array
-from ola.ClientWrapper import ClientWrapper
-
-from liblo import *
 import logging
+
 from sender import ArtNetSender
+
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
@@ -17,19 +15,11 @@ class ArtNetToArtnet(object):
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
 
-
-
-    def changeNetwork(self,artnetArray):
+    def changeNetwork(self, artnetArray):
         artnetSender = ArtNetSender(self.artNetIp)
         artnetSender.packet.frame = artnetArray
         artnetSender.sendFrames()
 
     def readConfig(self):
         self.config.read('config.cfg')
-        self.artNetIp = self.config.get("SENDERIP","ARTNETIP")
-
-
-
-
-
-
+        self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")

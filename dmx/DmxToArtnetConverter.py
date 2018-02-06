@@ -6,6 +6,7 @@ from sender import ArtNetSender
 log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
+
 class DmxToArtnetConverter(object):
 
     def __init__(self):
@@ -14,7 +15,6 @@ class DmxToArtnetConverter(object):
         self.log.setLevel(logging.INFO)
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
-
 
     def convert(self, data):
         self.log.info("Received TOP")
@@ -25,5 +25,5 @@ class DmxToArtnetConverter(object):
 
     def readConfig(self):
         self.config.read('config.cfg')
-        self.artNetIp = self.config.get("SENDERIP","ARTNETIP")
-        self.senderUniverse = int(self.config.get("SENDERIP","ARTNETUNIVERSE"))
+        self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")
+        self.senderUniverse = int(self.config.get("SENDERIP", "ARTNETUNIVERSE"))

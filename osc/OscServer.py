@@ -1,8 +1,8 @@
 #!/usr/bin/python2
 
-from liblo import *
 import logging
-import OSC
+from liblo import *
+
 log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
