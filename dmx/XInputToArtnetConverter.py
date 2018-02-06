@@ -1,4 +1,3 @@
-"""Simple example showing how to get gamepad events."""
 
 from __future__ import print_function
 
@@ -51,6 +50,12 @@ class XinputToArtnetConverter(object):
             "ABS_X", "ABS_Y",
             "ABS_RX", "ABS_RY",
         ]
+        self.YJoystick = [
+            "ABS_Y", "ABS_RY"
+        ]
+        self.backButtons = [
+            "ABS_RZ", "ABS_Z"
+        ]
         self.leftButtonsCode = [
             "ABS_HAT0Y", "ABS_HAT0X"
         ]
@@ -82,7 +87,8 @@ class XinputToArtnetConverter(object):
                 self.btnClicked(event)
             elif event.ev_type == "Absolute":
                 self.absoluteMoved(event)
-        self.artnetSender.sendFramesWithLog()
+        if not (len(events) == 1 and events[0].ev_type == "Sync"):
+            self.artnetSender.sendFramesWithLog()
 
     def btnClicked(self, e):
         if e.state == 0:
@@ -91,7 +97,7 @@ class XinputToArtnetConverter(object):
             self.artnetSender.packet.frame[self.keyMapping[e.code]] = 255
 
     def absoluteMoved(self, e):
-        if e.code == "ABS_RZ" or e.code == "ABS_Z":
+        if e.code in self.backButtons:
             self.sendBackButtons(e)
         elif e.code in self.joysticksCode:
             self.sendJoysticks(e)
@@ -108,7 +114,7 @@ class XinputToArtnetConverter(object):
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = 255
 
     def sendJoysticks(self, e):
-        if e.state == 255 and e.code in ["ABS_Y", "ABS_RY"]:
+        if e.state == 255 and e.code in self.YJoystick:
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_LEFT"]] = 0
             self.artnetSender.packet.frame[self.keyMapping[e.code + "_RIGHT"]] = 0
         elif e.state == 0:
