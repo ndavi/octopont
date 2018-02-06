@@ -4,50 +4,52 @@ from __future__ import print_function
 
 import ConfigParser
 import logging
-from time import sleep
-from inputs import get_gamepad
-from inputs import UnpluggedError
-from sender import ArtNetSender
 
+from inputs import UnpluggedError
+from inputs import get_gamepad
+
+from sender import ArtNetSender
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 MAX_JOYSTICK_VALUE_RIGHT = 32767.0
 MAX_JOYSTICK_VALUE_LEFT = 32768.0
+
+
 class XinputToArtnetConverter(object):
 
     def __init__(self):
         self.log = logging.getLogger("dmxtooscconverter")
         self.log.setLevel(logging.INFO)
-        self.keyMapping = {"BTN_SOUTH": 0, # Croix
-                           "BTN_WEST": 1, # Triangle
-                           "BTN_NORTH": 2, # Carre
-                           "BTN_EAST": 3, # Rond
-                           "BTN_TL": 4, # L1
-                           "BTN_TR": 5, # R1
-                           "BTN_START": 6, # Start
-                           "BTN_SELECT": 7, # Select
-                           "BTN_THUMBL": 8, # Click Joystick Gauche
-                           "BTN_THUMBR": 9, # Click Joystick Droit
+        self.keyMapping = {"BTN_SOUTH": 0,  # Croix
+                           "BTN_WEST": 1,  # Triangle
+                           "BTN_NORTH": 2,  # Carre
+                           "BTN_EAST": 3,  # Rond
+                           "BTN_TL": 4,  # L1
+                           "BTN_TR": 5,  # R1
+                           "BTN_START": 6,  # Start
+                           "BTN_SELECT": 7,  # Select
+                           "BTN_THUMBL": 8,  # Click Joystick Gauche
+                           "BTN_THUMBR": 9,  # Click Joystick Droit
                            "ABS_RZ": 10,  # R2
                            "ABS_Z": 11,  # L2
-                           "ABS_X_LEFT": 12, # Joystick gauche a gauche
-                           "ABS_X_RIGHT": 13, # Joystick gauche a droite
-                           "ABS_Y_LEFT": 14, # Joystick gauche en haut
-                           "ABS_Y_RIGHT": 15, # Joystick gauche en bas
-                           "ABS_RX_LEFT": 16, # Joystick droite a gauche
-                           "ABS_RX_RIGHT": 17, # Joystick droite a droite
-                           "ABS_RY_LEFT": 18, # Joystick droite en haut
-                           "ABS_RY_RIGHT": 19, # Joystick droite en bas
-                           "ABS_HAT0Y_LEFT": 20, # Fleche haut
-                           "ABS_HAT0Y_RIGHT": 21, # Fleche bas
-                           "ABS_HAT0X_LEFT": 22, # Fleche gauche
-                           "ABS_HAT0X_RIGHT": 23, # Fleche droite
+                           "ABS_X_LEFT": 12,  # Joystick gauche a gauche
+                           "ABS_X_RIGHT": 13,  # Joystick gauche a droite
+                           "ABS_Y_LEFT": 14,  # Joystick gauche en haut
+                           "ABS_Y_RIGHT": 15,  # Joystick gauche en bas
+                           "ABS_RX_LEFT": 16,  # Joystick droite a gauche
+                           "ABS_RX_RIGHT": 17,  # Joystick droite a droite
+                           "ABS_RY_LEFT": 18,  # Joystick droite en haut
+                           "ABS_RY_RIGHT": 19,  # Joystick droite en bas
+                           "ABS_HAT0Y_LEFT": 20,  # Fleche haut
+                           "ABS_HAT0Y_RIGHT": 21,  # Fleche bas
+                           "ABS_HAT0X_LEFT": 22,  # Fleche gauche
+                           "ABS_HAT0X_RIGHT": 23,  # Fleche droite
                            "BTN_MODE": 24,  # Bouton du milieu
                            }
         self.joysticksCode = [
             "ABS_X", "ABS_Y",
-            "ABS_RX","ABS_RY",
+            "ABS_RX", "ABS_RY",
         ]
         self.leftButtonsCode = [
             "ABS_HAT0Y", "ABS_HAT0X"
@@ -71,17 +73,16 @@ class XinputToArtnetConverter(object):
                 self.log.error("Gamepad disconnected " + err.message)
                 exit(201)
             except KeyError, err:
-                self.log.error("Le gamepad n'est pas dans le bon mode reception de : " + err.message)
+                self.log.error("Le gamepad n'est pas dans le bon mode ; reception de : " + err.message)
                 exit(202)
 
-
     def getInputs(self, events):
-       for event in events:
-           if event.ev_type == "Key":
-               self.btnClicked(event)
-           elif event.ev_type == "Absolute":
-               self.absoluteMoved(event)
-       self.artnetSender.sendFramesWithLog()
+        for event in events:
+            if event.ev_type == "Key":
+                self.btnClicked(event)
+            elif event.ev_type == "Absolute":
+                self.absoluteMoved(event)
+        self.artnetSender.sendFramesWithLog()
 
     def btnClicked(self, e):
         if e.state == 0:
@@ -96,7 +97,6 @@ class XinputToArtnetConverter(object):
             self.sendJoysticks(e)
         elif e.code in self.leftButtonsCode:
             self.leftButtonsClicked(e)
-
 
     def leftButtonsClicked(self, e):
         if e.state == 0:
