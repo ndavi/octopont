@@ -57,11 +57,11 @@ class OctoPont(object):
         self.artnetToDmxConverter.convert(data.framedata)
 
     def newArtNetDataNetworkChange(self, data):
-        result = int(data.framedata[1] * 2.5)
-        if(result <= 255):
-            data.framedata[1] = result
-        else:
-            data.framedata[1] = 255
+        #result = int(data.framedata[1] * 2.5)
+        #if(result <= 255):
+        #    data.framedata[1] = result
+        #else:
+        #    data.framedata[1] = 255
         self.artnetNetworkChanger.changeNetwork(data.framedata)
 
     def newDmxToArtnetData(self,data):
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
     elif(args.artnetchanger):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> artnet')
-        usbDmx.artnetNetworkChanger = usbDmx.ArtNetToArtnet()
+        usbDmx.artnetNetworkChanger = dmx.ArtNetToArtnet()
         usbDmx.runArtNetToOtherNetwork()
 
     elif (args.osctoartnet):

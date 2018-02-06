@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 
 
 class ArtNetSender():
-    def __init__(self,address='2.0.0.1', port=STANDARD_PORT):
+    def __init__(self,address='192.168.1.26', port=STANDARD_PORT):
         self.log = logging.getLogger('motherboard.artnet')
         self.address = address
         self.port = port
