@@ -154,7 +154,7 @@ if __name__ == "__main__":
     elif (args.osctoartnet):
         usbDmx.log.info('L\'octopont demarre en mode pont osc -> artnet')
         usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.oscToArtNetConverter = usbDmx.OscToArtnetConverter(usbDmx.osc)
+        usbDmx.oscToArtNetConverter = OscToArtnetConverter
         usbDmx.runOscToArtNet()
 
     elif (args.fixtureMoteurs):
