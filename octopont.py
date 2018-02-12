@@ -136,13 +136,13 @@ if __name__ == "__main__":
     usbDmx = OctoPont()
     if (args.artnetdmx):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> dmx')
-        usbDmx.artnetToDmxConverter = usbDmx.ArtNetToDMXConverter()
+        usbDmx.artnetToDmxConverter = dmx.ArtNetToDMXConverter()
         usbDmx.runArtNetToDmx()
 
     elif (args.node):
         usbDmx.log.info('L\'octopont demarre en mode node')
-        usbDmx.artnetToDmxConverter = usbDmx.ArtNetToDMXConverter()
-        usbDmx.dmxToArtnetConverter = usbDmx.DmxToArtnetConverter()
+        usbDmx.artnetToDmxConverter = dmx.ArtNetToDMXConverter()
+        usbDmx.dmxToArtnetConverter = dmx.DmxToArtnetConverter()
         threading.Thread(target=usbDmx.runDmxToArtnet).start()
         usbDmx.runArtNetToDmx()
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     elif (args.osctoartnet):
         usbDmx.log.info('L\'octopont demarre en mode pont osc -> artnet')
         usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.oscToArtNetConverter = OscToArtnetConverter
+        usbDmx.oscToArtNetConverter = osc.OscToArtnetConverter(usbDmx.osc)
         usbDmx.runOscToArtNet()
 
     elif (args.fixtureMoteurs):
