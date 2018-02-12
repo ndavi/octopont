@@ -3,6 +3,10 @@ import ConfigParser
 import logging
 import threading
 
+import signal
+
+import time
+
 from sender import ArtNetSender
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
@@ -16,6 +20,8 @@ class OscToArtnetConverter(object):
         self.osc = osc
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
+        self.oscThread = None
+        self.running = True
 
     def sendTopDepart(self, addr, tags, stuff, source):
         self.log.info("Receiving TOP DEPART")
@@ -35,9 +41,17 @@ class OscToArtnetConverter(object):
         self.osc.s.addMsgHandler("/TopDepart", self.sendTopDepart)
         self.osc.s.addMsgHandler("/Top", self.sendTop)
         self.log.info("Receiver OSC activated")
-        st = threading.Thread(target=self.osc.s.serve_forever)
+        self.oscThread = threading.Thread(target=self.osc.s.serve_forever)
+        self.oscThread.setDaemon(True)
+        signal.signal(signal.SIGINT, self.closeThread)
+        self.oscThread.start()
+        while self.running:
+            time.sleep(0.5)
 
-        st.start()
+    def closeThread(self, signal, frame):
+        self.osc.s.close()
+        self.running = False
+
 
     def readConfig(self):
         self.config.read('config.cfg')
