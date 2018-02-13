@@ -7,12 +7,13 @@ import sys
 import threading
 import traceback
 from time import sleep
-
+import converter
+from servers import osc
+from servers import artnet
 from ola.ClientWrapper import ClientWrapper
 
-import dmx
-import osc
-from artnetReceiver import ArtNetServer
+import converter
+from servers.artnet import ArtNetServer
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
@@ -144,44 +145,44 @@ if __name__ == "__main__":
     usbDmx = OctoPont()
     if (args.artnetdmx):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> dmx')
-        usbDmx.artnetToDmxConverter = dmx.ArtNetToDMXConverter()
+        usbDmx.artnetToDmxConverter = converter.ArtNetToDMXConverter()
         usbDmx.runArtNetToDmx()
 
     elif (args.node):
         usbDmx.log.info('L\'octopont demarre en mode node')
-        usbDmx.artnetToDmxConverter = dmx.ArtNetToDMXConverter()
-        usbDmx.dmxToArtnetConverter = dmx.DmxToArtnetConverter()
+        usbDmx.artnetToDmxConverter = converter.ArtNetToDMXConverter()
+        usbDmx.dmxToArtnetConverter = converter.DmxToArtnetConverter()
         threading.Thread(target=usbDmx.runDmxToArtnet).start()
         usbDmx.runArtNetToDmx()
 
     elif (args.artnetchanger):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> artnet')
-        usbDmx.artnetNetworkChanger = dmx.ArtNetToArtnet()
+        usbDmx.artnetNetworkChanger = converter.ArtNetToArtnet()
         usbDmx.runArtNetToOtherNetwork()
 
     elif (args.artnettoosc):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> osc')
         usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.artnetToOsc = osc.ArtNetToOSCConverter(usbDmx.osc)
+        usbDmx.artnetToOsc = converter.ArtNetToOSCConverter(usbDmx.osc)
         usbDmx.runArtNetToOSC()
 
     elif (args.osctoartnet):
         usbDmx.log.info('L\'octopont demarre en mode pont osc -> artnet')
         usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.oscToArtNetConverter = osc.OscToArtnetConverter(usbDmx.osc)
+        usbDmx.oscToArtNetConverter = converter.OscToArtnetConverter(usbDmx.osc)
         usbDmx.runOscToArtNet()
 
     elif (args.fixtureMoteurs):
         usbDmx.log.info('L\'octopont demarre en mode fixture moteurs')
         usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.fixtureMoteurs = dmx.FixtureMoteurs(usbDmx.osc)
+        usbDmx.fixtureMoteurs = converter.FixtureMoteurs(usbDmx.osc)
         usbDmx.runFixtureMoteurs()
 
     elif (args.xinputToArtnet):
         usbDmx.log.info('L\'octopont demarre en mode xinput -> artnet')
-        converter = dmx.XinputToArtnetConverter()
+        converter = converter.XinputToArtnetConverter()
     else:
         usbDmx.osc = osc.OctoPontOSCServer()
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
-        usbDmx.dmxToOscConverter = dmx.DmxToOSCConverter(usbDmx.osc)
+        usbDmx.dmxToOscConverter = converter.DmxToOSCConverter(usbDmx.osc)
         usbDmx.runDmxToOsc()

@@ -1,10 +1,8 @@
 #!/usr/bin/python2
 import ConfigParser
 import logging
-import threading
-
 import signal
-
+import threading
 import time
 
 from sender import ArtNetSender

@@ -5,7 +5,7 @@ from liblo import make_method, Address, Message
 
 import OSC
 
-import OscServer as osc
+from servers.osc import OscServer as osc
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
