@@ -64,6 +64,9 @@ class OctoPont(object):
         #    data.framedata[1] = 255
         self.artnetNetworkChanger.changeNetwork(data.framedata)
 
+    def newArtNetToOSCData(self, data):
+        self.artnetToOsc.convert(data)
+
     def newDmxToArtnetData(self, data):
         self.dmxToArtnetConverter.convert(data)
 
@@ -91,6 +94,10 @@ class OctoPont(object):
     def runArtNetToOtherNetwork(self):
         artNetReceiver = ArtNetServer()
         artNetReceiver.run(self.newArtNetDataNetworkChange)
+
+    def runArtNetToOSC(self):
+        artNetReceiver = ArtNetServer()
+        artNetReceiver.run(self.newArtNetToOSCData)
 
     def runOscToArtNet(self):
         self.oscToArtNetConverter.start()
@@ -126,6 +133,7 @@ if __name__ == "__main__":
                         action='store_true')
     parser.add_argument('--artnetchanger', help='Lancement du programme en mode pont routeur artnet -> artnet',
                         action='store_true')
+    parser.add_argument('--artnettoosc', help='Lancement du programme en mode artnet -> osc', action='store_true')
     parser.add_argument('--osctoartnet', help='Lancement du programme en mode pont routeur osc -> artnet',
                         action='store_true')
     parser.add_argument('--node', help='Lancement du programme en mode node', action='store_true')
@@ -150,6 +158,12 @@ if __name__ == "__main__":
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> artnet')
         usbDmx.artnetNetworkChanger = dmx.ArtNetToArtnet()
         usbDmx.runArtNetToOtherNetwork()
+
+    elif (args.artnettoosc):
+        usbDmx.log.info('L\'octopont demarre en mode pont artnet -> osc')
+        usbDmx.osc = osc.OctoPontOSCServer()
+        usbDmx.artnetToOsc = osc.ArtNetToOSCConverter(usbDmx.osc)
+        usbDmx.runArtNetToOSC()
 
     elif (args.osctoartnet):
         usbDmx.log.info('L\'octopont demarre en mode pont osc -> artnet')
