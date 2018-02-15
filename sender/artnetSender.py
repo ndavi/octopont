@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class ArtNetSender():
-    def __init__(self, address='127.0.0.1', port=STANDARD_PORT):
+    def __init__(self, address='2.0.0.9', port=STANDARD_PORT):
         self.log = logging.getLogger(__name__)
         self.log.setLevel(logging.INFO)
         self.address = address

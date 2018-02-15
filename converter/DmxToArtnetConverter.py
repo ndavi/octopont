@@ -20,7 +20,7 @@ class DmxToArtnetConverter(object):
         self.log.info("Received TOP")
         artnetSender = ArtNetSender(self.artNetIp)
         artnetSender.packet.universe = self.senderUniverse
-        artnetSender.packet.frame = data;
+        artnetSender.packet.frame = data
         artnetSender.sendFrames()
 
     def readConfig(self):
