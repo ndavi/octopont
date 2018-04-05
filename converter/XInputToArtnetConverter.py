@@ -1,18 +1,23 @@
-
 from __future__ import print_function
-
 import ConfigParser
 import logging
-
 from inputs import UnpluggedError
 from inputs import get_gamepad
-
 from sender import ArtNetSender
+
+import os
 
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 MAX_JOYSTICK_VALUE_RIGHT = 32767.0
 MAX_JOYSTICK_VALUE_LEFT = 32768.0
+PLAYER_ONE = 6
+PLAYER_TWO = 7
+PLAYER_THREE = 8
+PLAYER_FOUR = 9
+MAX_CANAUX = 24
+MAX_PAGE = 4
+
 
 
 class XinputToArtnetConverter(object):
@@ -20,6 +25,13 @@ class XinputToArtnetConverter(object):
     def __init__(self):
         self.log = logging.getLogger("dmxtooscconverter")
         self.log.setLevel(logging.INFO)
+        self.page = 1
+        self.pageMapping = {
+            1: PLAYER_ONE,
+            2: PLAYER_TWO,
+            3: PLAYER_THREE,
+            4: PLAYER_FOUR
+        }
         self.keyMapping = {"BTN_SOUTH": 0,  # Croix
                            "BTN_WEST": 1,  # Triangle
                            "BTN_NORTH": 2,  # Carre
@@ -66,6 +78,7 @@ class XinputToArtnetConverter(object):
         self.start()
 
     def start(self):
+        os.system("echo " + str(PLAYER_ONE) + " > /sys/class/leds/xpad0/brightness")
         self.log.info("Le recepteur Xinput est pret")
         while True:
             try:
@@ -91,10 +104,25 @@ class XinputToArtnetConverter(object):
             self.artnetSender.sendFramesWithLog()
 
     def btnClicked(self, e):
-        if e.state == 0:
+        if e.code == "BTN_MODE":
+            self.changePage(e)
+        elif e.state == 0:
             self.artnetSender.packet.frame[self.keyMapping[e.code]] = 0
         elif e.state == 1:
             self.artnetSender.packet.frame[self.keyMapping[e.code]] = 255
+
+    def changePage(self, e):
+        if e.state == 1:
+            if self.page < 4:
+                self.page += 1
+                for key in self.keyMapping:
+                    self.keyMapping[key] += MAX_CANAUX + 1
+            else:
+                for key in self.keyMapping:
+                    self.keyMapping[key] -= (MAX_CANAUX + 1) * (MAX_PAGE - 1)
+                self.page = 1
+
+            os.system("echo " + str(self.pageMapping[self.page]) + " > /sys/class/leds/xpad0/brightness")
 
     def absoluteMoved(self, e):
         if e.code in self.backButtons:
