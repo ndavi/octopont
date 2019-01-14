@@ -21,9 +21,10 @@ class FixtureMoteurs(object):
 
     def setDmxArray(self, dmxArray):
         self.dmxArray = dmxArray
-        self.convert()
+        self.convert(dmxArray)
 
-    def convert(self):
+    def convert(self, dmxArray):
+        self.dmxArray = dmxArray
         for i in range(0, int(self.nbrMoteurs)):
             channels = self.channelMoteurs[i]
             position = self.dmxArray[int(channels[0])]

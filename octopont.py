@@ -109,6 +109,15 @@ class OctoPont(object):
         client.RegisterUniverse(self.receiveUniverse, client.REGISTER, self.newDmxToArtnetData)
         wrapper.Run()
 
+    def newColorsUsineAndMotorsData(self, artnetData):
+        self.artnetToOsc.convert(artnetData)
+        self.fixtureMoteurs.convert(artnetData)
+
+    def runColorsUsineAndMotors(self):
+        artNetReceiver = ArtNetServer()
+        artNetReceiver.run(self.newColorsUsineAndMotorsData)
+
+
     def runTest(self):
         while True:
             data = []
@@ -140,6 +149,8 @@ if __name__ == "__main__":
     parser.add_argument('--node', help='Lancement du programme en mode node', action='store_true')
     parser.add_argument('--fixtureMoteurs', help='Lancement du programme en mode fixture moteurs', action='store_true')
     parser.add_argument('--xinputToArtnet', help='Lancement du programme en mode fixture moteurs', action='store_true')
+    parser.add_argument('--artnettooscandmotors', help='Lancement du programme en mode fixture moteurs + couleurs Usine', action='store_true')
+
 
     args = parser.parse_args()
     usbDmx = OctoPont()
@@ -181,8 +192,15 @@ if __name__ == "__main__":
     elif (args.xinputToArtnet):
         usbDmx.log.info('L\'octopont demarre en mode xinput -> artnet')
         converter = converter.XinputToArtnetConverter()
+    elif (args.artnettooscandmotors):
+        usbDmx.log.info('L\'octopont demarre en mode pont artnet -> osc + fixture moteurs')
+        usbDmx.osc = osc.OctoPontOSCServer()
+        usbDmx.artnetToOsc = converter.ArtNetToOSCConverter(usbDmx.osc)
+        usbDmx.fixtureMoteurs = converter.FixtureMoteurs(usbDmx.osc)
+        usbDmx.runColorsUsineAndMotors()
     else:
         usbDmx.osc = osc.OctoPontOSCServer()
         usbDmx.log.info('L\'octopont demarre en mode convertisseur dmx -> osc')
         usbDmx.dmxToOscConverter = converter.DmxToOSCConverter(usbDmx.osc)
         usbDmx.runDmxToOsc()
+

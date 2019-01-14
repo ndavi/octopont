@@ -4,7 +4,7 @@ import socket
 import threading
 import time
 
-from artnet import packet, STANDARD_PORT, STYLE_CODES
+from libs.artnet import packet, STANDARD_PORT, STYLE_CODES
 
 log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
