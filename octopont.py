@@ -20,13 +20,13 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 class OctoPont(object):
     def __init__(self):
-        self.workingDir = os.getcwd()
+        self.workingDir = os.path.dirname(os.path.realpath(__file__))
         self.setLogs()
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read(self.workingDir + '/config.cfg')
         self.receiveUniverse = int(self.config.get("RECEIVERIP", "DMXUNIVERSE"))
 
     def setLogs(self):
@@ -89,15 +89,15 @@ class OctoPont(object):
         wrapper.Run()
 
     def runArtNetToDmx(self):
-        artNetReceiver = ArtNetServer()
+        artNetReceiver = ArtNetServer(workingDir=self.workingDir)
         artNetReceiver.run(self.newArtNetData)
 
     def runArtNetToOtherNetwork(self):
-        artNetReceiver = ArtNetServer()
+        artNetReceiver = ArtNetServer(workingDir=self.workingDir)
         artNetReceiver.run(self.newArtNetDataNetworkChange)
 
     def runArtNetToOSC(self):
-        artNetReceiver = ArtNetServer()
+        artNetReceiver = ArtNetServer(workingDir=self.workingDir)
         artNetReceiver.run(self.newArtNetToOSCData)
 
     def runOscToArtNet(self):
@@ -114,7 +114,7 @@ class OctoPont(object):
         self.fixtureMoteurs.convert(artnetData)
 
     def runColorsUsineAndMotors(self):
-        artNetReceiver = ArtNetServer()
+        artNetReceiver = ArtNetServer(workingDir=self.workingDir)
         artNetReceiver.run(self.newColorsUsineAndMotorsData)
 
 
@@ -194,9 +194,9 @@ if __name__ == "__main__":
         converter = converter.XinputToArtnetConverter()
     elif (args.artnettooscandmotors):
         usbDmx.log.info('L\'octopont demarre en mode pont artnet -> osc + fixture moteurs')
-        usbDmx.osc = osc.OctoPontOSCServer()
-        usbDmx.artnetToOsc = converter.ArtNetToOSCConverter(usbDmx.osc)
-        usbDmx.fixtureMoteurs = converter.FixtureMoteurs(usbDmx.osc)
+        usbDmx.osc = osc.OctoPontOSCServer(workingDir=usbDmx.workingDir)
+        usbDmx.artnetToOsc = converter.ArtNetToOSCConverter(usbDmx.osc, usbDmx.workingDir)
+        usbDmx.fixtureMoteurs = converter.FixtureMoteurs(usbDmx.osc, usbDmx.workingDir)
         usbDmx.runColorsUsineAndMotors()
     else:
         usbDmx.osc = osc.OctoPontOSCServer()

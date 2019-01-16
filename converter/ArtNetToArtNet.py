@@ -21,5 +21,5 @@ class ArtNetToArtnet(object):
         artnetSender.sendFrames()
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read("" + '/config.cfg')
         self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")

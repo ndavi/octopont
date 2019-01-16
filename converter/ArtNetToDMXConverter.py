@@ -24,7 +24,7 @@ class ArtNetToDMXConverter(object):
         self.wrapper.Stop()
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read("" + '/config.cfg')
         self.universe = int(self.config.get("SENDERIP", "DMXUNIVERSE"))
 
     def convert(self, artnetArray):

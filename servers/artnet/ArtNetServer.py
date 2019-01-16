@@ -4,20 +4,21 @@ import socket
 import threading
 import time
 
-from libs.artnet import packet, STANDARD_PORT, STYLE_CODES
+from artnet import packet, STANDARD_PORT, STYLE_CODES
 
 log = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class ArtNetServer(threading.Thread):
-    def __init__(self, address="127.0.0.1", nodaemon=False, runout=False):
+    def __init__(self, address="127.0.0.1", nodaemon=False, runout=False, workingDir=""):
         super(ArtNetServer, self).__init__()
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
         self.log = logging.getLogger("artnetserver")
         self.log.setLevel(logging.INFO)
+        self.workingDir = workingDir
 
         self.sock.bind(('', STANDARD_PORT))
         self.sock.settimeout(0.0)
@@ -35,7 +36,7 @@ class ArtNetServer(threading.Thread):
         self.data_callback = None
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read(self.workingDir + '/config.cfg')
         self.address = self.config.get("RECEIVERIP", "ARTNETIP")
 
     def run(self, data_callback):

@@ -6,9 +6,10 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 #Artnet Usine Video Couleeeeeurs
 class ArtNetToOSCConverter(object):
 
-    def __init__(self, osc):
+    def __init__(self, osc, workingDir = ""):
         self.log = logging.getLogger(__name__)
         self.log.setLevel(logging.INFO)
+        self.workingDir = workingDir
         self.osc = osc
         self.config = ConfigParser.RawConfigParser()
         self.readConfig()
@@ -18,7 +19,7 @@ class ArtNetToOSCConverter(object):
         self.frameToSendSecondMessage = [0,0,0]
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read(self.workingDir + '/config.cfg')
         self.rgbFixtureOne = [self.config.get("CHANNELVIDEOCOULEURS", "R0"),
                              self.config.get("CHANNELVIDEOCOULEURS", "G0"),
                              self.config.get("CHANNELVIDEOCOULEURS", "B0")]

@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class ArtNetSender():
-    def __init__(self, address='127.0.0.1', port=STANDARD_PORT):
+    def __init__(self, address='10.1.1.100', port=STANDARD_PORT):
         self.log = logging.getLogger(__name__)
         self.log.setLevel(logging.INFO)
         self.address = address
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         if (i == 254):
             i = 0
         artnetSender.packet.frame[1] = i
-        artnetSender.packet.universe = 6
+        artnetSender.packet.universe = 1
         i = i + 1
         time.sleep(0.01)
         print("send artnet")

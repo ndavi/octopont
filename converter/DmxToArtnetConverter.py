@@ -9,7 +9,8 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 class DmxToArtnetConverter(object):
 
-    def __init__(self):
+    def __init__(self, workingDir = ""):
+        self.workingDir = workingDir
         self.dmxArray = None
         self.log = logging.getLogger("dmxtooscconverter")
         self.log.setLevel(logging.INFO)
@@ -24,6 +25,6 @@ class DmxToArtnetConverter(object):
         artnetSender.sendFrames()
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read(workingDir + '/config.cfg')
         self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")
         self.senderUniverse = int(self.config.get("SENDERIP", "ARTNETUNIVERSE"))

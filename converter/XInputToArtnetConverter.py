@@ -169,7 +169,7 @@ class XinputToArtnetConverter(object):
         return dmxToSend
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read("" + '/config.cfg')
         self.artNetIp = self.config.get("SENDERIP", "ARTNETIP")
         self.senderUniverse = int(self.config.get("SENDERIP", "ARTNETUNIVERSE"))
 

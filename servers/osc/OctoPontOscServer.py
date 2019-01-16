@@ -11,7 +11,8 @@ logging.basicConfig(format='%(asctime)s %(name)s - %(levelname)s: %(message)s')
 
 
 class OctoPontOSCServer(osc.OscServer):
-    def __init__(self, port=7969):
+    def __init__(self, port=7970, workingDir=""):
+        self.workingDir = workingDir
         self.config = ConfigParser.RawConfigParser()
         super(OctoPontOSCServer, self).__init__(port)
         self.log = logging.getLogger('octopont.oscserver')
@@ -26,7 +27,7 @@ class OctoPontOSCServer(osc.OscServer):
         super(OctoPontOSCServer, self).start()
 
     def readConfig(self):
-        self.config.read('config.cfg')
+        self.config.read(self.workingDir + '/config.cfg')
         moteurs, portmoteurs = self.config.get("OSCTARGET", "MOTEURS").split(":")
         video, portvideo = self.config.get("OSCTARGET", "VIDEO").split(":")
         tablette, porttablette = self.config.get("OSCTARGET", "TABLETTE").split(":")
